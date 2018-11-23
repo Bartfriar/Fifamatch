@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { ResultsPage } from '../results/results';
 
 
 @IonicPage()
@@ -10,15 +11,19 @@ import * as firebase from 'firebase';
 })
 export class ScoresPage {
 
-  GameID = 1;
+  GameID = "Arsenal";
   counter = 0;
   counter2 = 0;
-  team_name:string;
+  second_team:string;
   username:string;
+  first_team:string;
+  challengekey: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.team_name = navParams.get("name_team");
-    this.username = navParams.get("opponent_name")
-    console.log(this.username)
+    this.second_team = navParams.get("name_team");
+    this.username = navParams.get("opponent_name");
+    this.first_team = navParams.get('first_name_team');
+    this.challengekey = navParams.get('challenge_key');
+    console.log(this.challengekey)
   }
 
   increment(){
@@ -38,16 +43,17 @@ export class ScoresPage {
   }
 
   clear(){
-    this.counter
   }
 
   save_score(){
-    firebase.database().ref('Games/' + this.GameID).set({
-      TeamA:this.team_name,
-      TeamB:"Liverpool",
-      TeamA_Score:this.counter,
-      TeamB_Score:this.counter2,
+    firebase.database().ref('Games/' + this.challengekey).update({
+      GameID:this.challengekey,
+      First_Team:this.GameID,
+      Second_Team:this.second_team,
+      First_Team_Score:this.counter,
+      Second_Team_Score:this.counter2
     });
+    this.navCtrl.push(ResultsPage, {chall_key:this.challengekey});
   }
   
   reset(){

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { TeamInfo } from '../../models/team-details/team-details.interface';
-// FIrebase
+// Firebase
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormationsPage } from '../formations/formations';
@@ -22,16 +22,15 @@ export class TeamDetailsPage {
     public afAuth: AngularFireAuth,
     public afDb: AngularFireDatabase) {
       this.initializeItems();
-      afDb.list(`Teams`).snapshotChanges()
-        .subscribe((teams: any) => {
+      afDb.list(`Teams`).valueChanges().subscribe((teams: any) => {
           this.team = teams;
           console.log(this.team);
       });
   }
 
   format(chosen_team){
-    var logo = chosen_team.payload.val().Logo;
-    var team_name = chosen_team.payload.val().Team_Name;
+    var logo = chosen_team.Logo;
+    var team_name = chosen_team.Team_Name;
 
     this.navCtrl.push(FormationsPage, {name_team:team_name, logo_team:logo})
   }

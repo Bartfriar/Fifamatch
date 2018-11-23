@@ -23,6 +23,12 @@ import { ScoresPage } from '../pages/scores/scores';
 import { FormationsPage} from '../pages/formations/formations'
 import { GamePage } from '../pages/game/game';
 import { RequestsPage } from '../pages/requests/requests';
+import { RanksPage } from '../pages/ranks/ranks';
+import { AmateurPage } from '../pages/amateur/amateur';
+import { ProfessionalPage } from '../pages/professional/professional';
+import { MatchPage } from '../pages/match/match';
+import { ResultsPage } from '../pages/results/results';
+import { BeginnerPage } from '../pages/beginner/beginner';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,13 @@ import { RequestsPage } from '../pages/requests/requests';
     ScoresPage,
     FormationsPage,
     GamePage,
-    RequestsPage
+    RequestsPage,
+    RanksPage,
+    AmateurPage,
+    ProfessionalPage,
+    MatchPage,
+    ResultsPage,
+    BeginnerPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +75,13 @@ import { RequestsPage } from '../pages/requests/requests';
     ScoresPage,
     FormationsPage,
     GamePage,
-    RequestsPage
+    RequestsPage,
+    RanksPage,
+    AmateurPage,
+    ProfessionalPage,
+    MatchPage,
+    ResultsPage,
+    BeginnerPage
   ],
   providers: [
     StatusBar,

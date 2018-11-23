@@ -5,6 +5,8 @@ import { ToastController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { LoginPage } from '../login/login';
 import { TeamDetailsPage } from '../team-details/team-details';
+import * as firebase from 'firebase';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -19,6 +21,8 @@ export class RegisterPage {
   b: string;
   username: string;
   Tel: string;
+  Points:number = 0;
+  Position:string = "Beginner";
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -37,16 +41,24 @@ export class RegisterPage {
       .then((user) => {
         var userDetails = user.user;
         this.afDb.object(`users/${userDetails.uid}`).set({
-          Email: userDetails.email,
-          Username: this.username,
+          email: userDetails.email,
+          username: this.username,
+          UserID:userDetails.uid,
           Telephone: this.Tel
         });
+        
+    firebase.database().ref(`LeaderBoards/${userDetails.uid}`).update({
+      User:this.username,
+      Points: this.Points,
+      Rank:this.Position,
+      Wins:0,
+      Losses:0,
+    });
         var toast = this.toastCtrl.create({
           message: 'You have successfully registered',
           duration: 3000
-        })
+        });
         toast.present();
-        this.navCtrl.setRoot(TeamDetailsPage);
       }).catch((err) => {
         const toast = this.toastCtrl.create({
           message: err.message,
@@ -54,6 +66,7 @@ export class RegisterPage {
         });
         toast.present();
       })
+      this.navCtrl.setRoot(TeamDetailsPage);
   }
 
   gotoLoginPage() {

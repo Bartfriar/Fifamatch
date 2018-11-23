@@ -14,6 +14,11 @@ import { AboutPage } from '../pages/about/about';
 import { FormationsPage } from '../pages/formations/formations';
 import { GamePage } from '../pages/game/game';
 import { RequestsPage } from '../pages/requests/requests';
+import { RanksPage } from '../pages/ranks/ranks';
+import { MatchPage } from '../pages/match/match';
+import * as firebase from 'firebase';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { BeginnerPage } from '../pages/beginner/beginner';
 
 
 @Component({
@@ -22,18 +27,36 @@ import { RequestsPage } from '../pages/requests/requests';
 export class MyApp {
   
   rootPage:any;
+  team:any;
+  wteam:any;
 
   constructor(
     public checkAut: AngularFireAuth,
+    public afdb:AngularFireDatabase,
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+
+      this.afdb.list(`users`).stateChanges().subscribe((cteam:any)=>{
+        this.wteam = cteam.payload.val().Team
+          // if (this.wteam == null) {
+          //   this.rootPage = TeamDetailsPage
+          // } else {
+          //   this.rootPage = HomePage
+          // }
+      });
+
       checkAut.authState.subscribe(user => {
-        if(user){
-          console.log('you are logged in');
-          this.rootPage = HomePage
-        } else {
+        // if(user  && this.wteam==null){
+        //   console.log('you are logged in');
+        //   this.rootPage = TeamDetailsPage
+        // }
+        // else 
+        if(user)
+        {
+          this.rootPage = BeginnerPage
+        } 
+        else {
           console.log('Not logged in');
           this.rootPage = LoginPage
-          
         }
       })
     platform.ready().then(() => {

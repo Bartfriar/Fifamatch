@@ -13,14 +13,14 @@
 
 </ion-header>
 <ion-content padding>
-    <div class="action_bar">
+    <!-- <div class="action_bar">
         <button ion-button icon-only round>
             <ion-icon name="person"></ion-icon>
           </button>
-          <button ion-button icon-only round>
+          <button ion-button icon-only round >
             <ion-icon name="home"></ion-icon>
           </button>
-  </div>
+  </div> -->
   <ion-grid>
     <ion-row>
       <button ion-button large block (click)="reset()">Clear Scores</button>
@@ -41,11 +41,10 @@
 
     <ion-row>
       <ion-col col-4 offset-1>
-        <ion-label>{{team_name}}</ion-label>
+        <ion-label>{{first_team}}</ion-label>
       </ion-col>
       <ion-col col-3 offset-3>
-        <ion-label>{{username}}</ion-label>
-        <ion-label>Liverpool</ion-label>
+        <ion-label>{{second_team}}</ion-label>
       </ion-col>
     </ion-row>
     <ion-row>

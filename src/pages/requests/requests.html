@@ -12,19 +12,19 @@
 
 </ion-header>
 <ion-content padding>
-  <ion-slides>
-    <ion-slide *ngFor="let user of users">
-          <ion-card >
+  <ion-slides >
+    <ion-slide *ngFor="let Challenge of Challenges">
+          <ion-card *ngIf ="Challenge.Opponent == currentuser" >
               <img src="assets/fifamatch.png"/><br>
-              <h1>{{ challenger }}</h1>
-              <img src="{{ user.payload.val().logo }}" alt="Arsenal logo">
-              <h2>{{ teamdet }}</h2><br>
-              <p>Formation:</p>
+              <h1>{{ Challenge.Challenger }}</h1>
+              <img src="{{ teamlogo }}" alt="Arsenal logo">
+              <h2>{{ challengerteam}}</h2><br>
+              <p>Formation:{{challengerform}}</p>
               <p>Wins: </p>
               <p>Loss: </p>
               <p>Rank: </p>
-              <button ion-button round (click)="accept(user)">Accept</button>
-              <button ion-button round (click)="decline(user)">Decline</button>
+              <button ion-button round (click)="accept(Challenge)">Accept</button>
+              <button ion-button round (click)="decline(Challenge)">Decline</button>
             </ion-card>
     </ion-slide>
   </ion-slides>

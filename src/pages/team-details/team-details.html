@@ -15,11 +15,11 @@
         <ion-list-header>
           Clubs
         </ion-list-header>
-        <button ion-item *ngFor="let team of teams" (click)="format(team)">
+        <button ion-item *ngFor="let teams of team" (click)="format(teams)">
           <ion-avatar item-start>
-            <img [src]="team.payload.val().Logo">
+            <img [src]="teams.Logo">
           </ion-avatar>
-          <p>{{ team.payload.val().Team_Name }}</p>
+          <p>{{ teams.Team_Name }}</p>
         </button>
       </ion-list>
 

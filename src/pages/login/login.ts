@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { TabsPage } from '../tabs/tabs';
 import { ToastController } from 'ionic-angular';
 import { RegisterPage } from '../register/register';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -27,9 +28,9 @@ password:string;
   login()
   {
     this.authe.auth.signInWithEmailAndPassword(this.email,this.password)
-    .then(()=>{
-      console.log('Welcome to the app');
-      this.navCtrl.setRoot(TabsPage);
+    .then((user)=>{
+      console.log('Welcome to the Fifa Match');
+      this.navCtrl.setRoot(HomePage);
       const toast = this.toastCtrl.create({
         message: 'User Login successfully',
         duration: 3000

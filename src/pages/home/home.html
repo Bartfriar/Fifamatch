@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <div class="action_bar">
-        <button ion-button icon-only round>
+        <button ion-button icon-only round (click)="profile()">
             <ion-icon name="person"></ion-icon>
           </button>
           <button ion-button icon-only round>
@@ -19,13 +19,13 @@
 
 <ion-content padding>
 <ion-slides>
-      <ion-slide *ngFor="let user of users">
-            <ion-card >
-                <img src="assets/fifamatch.png"/><br>
-                <h1>{{ user.payload.val().username }}</h1>
-                <img src="{{ user.payload.val().logo }}" alt="Arsenal logo">
-                <h2>{{ nameteam }}</h2><br>
-                <p>Formation:</p>
+      <ion-slide *ngFor="let user of users" >
+            <ion-card *ngIf ="user.email != useremail" >
+                <img src="assets/fifamatch.png" class="userppic"/><br>
+                <h1>{{ user.username }}</h1>
+                <img src="{{ user.Team.logo }}" alt="Arsenal logo" class="teamlogo">
+                <h2>{{ user.Team.team }}</h2><br>
+                <p>{{user.Team.formation}}</p>
                 <p>Wins: </p>
                 <p>Loss: </p>
                 <p>Rank: </p>
@@ -33,31 +33,4 @@
               </ion-card>
       </ion-slide>
 </ion-slides>
-  <!-- <ion-content class="card-background-page">
-
-    <ion-card>
-      <img src="assets/fifamatch.png"/>
-      <div class="card-title">São Paulo</div>
-      <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-  
-    <ion-card>
-      <img src="assets/fifamatch.png"/>
-      <div class="card-title">Amsterdam</div>
-      <div class="card-subtitle">64 Listings</div>
-    </ion-card>
-  
-    <ion-card>
-      <img src="assets/fifamatch.png"/>
-      <div class="card-title">San Francisco</div>
-      <div class="card-subtitle">72 Listings</div>
-    </ion-card>
-  
-    <ion-card>
-      <img src="assets/fifamatch.png"/>
-      <div class="card-title">Madison</div>
-      <div class="card-subtitle">28 Listings</div>
-    </ion-card>
-  
-  </ion-content>   -->
 </ion-content>

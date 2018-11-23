@@ -25,6 +25,7 @@ export class GamePage {
   teams:any;
   username:string;
   GameID:string;
+  challengekey:string;
   constructor(
     public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -36,7 +37,8 @@ export class GamePage {
           console.log(this.teams);
       });
 
-      this.username = navparams.get("opponent_name")
+      this.username = navparams.get("opponent_name"),
+      this.challengekey = navparams.get('Challenge_key');
       console.log(this.username)
 
       // this.afAuth.authState.subscribe((auth) => {
@@ -48,15 +50,14 @@ export class GamePage {
   //   else { return this.authState['displayName'] || 'User without a Name' }
   // }
   game(chosen_team){
-    this.GameID = this.username + "1";
+    // this.GameID = this.username + "1";
     var logo = chosen_team.payload.val().Logo;
     var team_name = chosen_team.payload.val().Team_Name;
     
-    this.navCtrl.push(ScoresPage, {name_team:team_name, logo_team:logo, opponent_name:chosen_team.payload.val().username}) 
-   
-    firebase.database().ref('Games/' + this.GameID).set({
-      TeamA:team_name,
-      TeamB:"Liverpool"
+    this.navCtrl.push(ScoresPage, {challenge_key:this.challengekey, first_name_team:team_name, logo_team:logo, opponent_name:chosen_team.payload.val().username}) 
+   console.log(this.challengekey)
+    firebase.database().ref('Games/' + this.challengekey).update({
+      First_Team:team_name,
     });
   }
 }
