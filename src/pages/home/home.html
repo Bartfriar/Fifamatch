@@ -1,36 +1,40 @@
 <ion-header>
   <ion-navbar>
     <div class="action_bar">
-        <button ion-button icon-only round (click)="profile()">
-            <ion-icon name="person"></ion-icon>
-          </button>
-          <button ion-button icon-only round>
-            <ion-icon name="home"></ion-icon>
-          </button>
-          <button ion-button icon-only round (click)="torequests()">
-            <ion-icon name="star"></ion-icon>
-          </button>
-          <button ion-button icon-only round (click)="logout()" >
-            <ion-icon name="exit"></ion-icon>
-          </button>
-  </div>
+      <button ion-button icon-only round (click)="profile()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button icon-only round>
+        <ion-icon name="home"></ion-icon>
+      </button>
+      <button ion-button icon-only round (click)="torequests()">
+        <ion-icon name="star"></ion-icon>
+      </button>
+      <button ion-button icon-only round (click)="logout()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<ion-slides>
-      <ion-slide *ngFor="let user of users" >
-            <ion-card *ngIf ="user.email != useremail" >
-                <img src="assets/fifamatch.png" class="userppic"/><br>
-                <h1>{{ user.username }}</h1>
-                <img src="{{ user.Team.logo }}" alt="Arsenal logo" class="teamlogo">
-                <h2>{{ user.Team.team }}</h2><br>
-                <p>{{user.Team.formation}}</p>
-                <p>Wins: </p>
-                <p>Loss: </p>
-                <p>Rank: </p>
-                <button ion-button round (click)="challenge(user)">Challenge</button>
-              </ion-card>
-      </ion-slide>
-</ion-slides>
+  <ion-slides>
+    <ion-slide *ngFor="let user of users">
+      <ion-card *ngIf="state == 'Yes'">
+        <img src="assets/fifamatch.png" class="userppic" /><br />
+        <h1>{{ user.username }}</h1>
+        <img src="{{ user.Team.logo }}" alt="Arsenal logo" class="teamlogo" />
+        <h2>{{ user.Team.team }}</h2>
+        <br />
+        <p>Formation: {{ user.Team.formation }}</p>
+        <button ion-button round>More Info</button>
+        <!--
+          <p>Wins:</p>
+          <p>Loss:</p>
+          <p>Rank:{{ rank }}</p>
+        -->
+        <button ion-button round (click)="challenge(user)">Challenge</button>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
